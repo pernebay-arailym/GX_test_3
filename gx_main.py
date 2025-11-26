@@ -40,3 +40,11 @@ expectation2 = gx.expectations.ExpectColumnDistinctValuesToBeInSet(
 suite.add_expectation(expectation=expectation1)
 suite.add_expectation(expectation=expectation2)
 
+#define 'Validation Definition' : a Validation Definition is a fixed reference that links a Batch of data to an Expectation Suite
+validation_definition = gx.ValidationDefinition(
+    data=batch_definition, suite=suite, name='flight_batch_definition'
+)
+
+validation_definition = context.validation_definitions.add(validation_definition)
+validation_results = validation_definition.run()
+print(validation_results)
