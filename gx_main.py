@@ -48,3 +48,8 @@ validation_definition = gx.ValidationDefinition(
 validation_definition = context.validation_definitions.add(validation_definition)
 validation_results = validation_definition.run()
 print(validation_results)
+
+#create a Checkpoint with Actions for multiple validation_definition
+validation_definitions = [
+    validation_definition #can be multiple definitions
+]
