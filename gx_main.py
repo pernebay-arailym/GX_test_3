@@ -53,3 +53,21 @@ print(validation_results)
 validation_definitions = [
     validation_definition #can be multiple definitions
 ]
+
+#create a list of Actions for the Checkpoint to perform
+action_list =[
+    #this Action sends a Slack Notification if a Expectation fails
+    gx.checkpoint.SlackNotificationAction(
+        name = "send_slack_notification_on_failed_expectations",
+        slack_token = "${validation_notification_slack_webhook}",
+        slack_channel="${validation_notification_slack_channel}",
+        notify_on="failure",
+        show_failed_expectations=True,
+    ),
+
+    #This Action updates the Data Docs static website with the Validation
+    #results after the Checkpoint is run
+    gx.checkpoint.UpdateDataDocsAction(
+        name="update_all_data_docs",
+    )
+]
