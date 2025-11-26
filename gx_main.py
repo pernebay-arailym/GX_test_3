@@ -30,3 +30,13 @@ print(batch.head())
 suite = context.suites.add(
     gx.ExpectationSuite(name="flight_expectation_suite")
 )
+
+expectation1 = gx.expectations.ExpectColumnValuesToNotBeNull(column = "airline")
+expectation2 = gx.expectations.ExpectColumnDistinctValuesToBeInSet(
+    column = "class",
+    value_set=['economy', 'business']
+)
+
+suite.add_expectation(expectation=expectation1)
+suite.add_expectation(expectation=expectation2)
+
