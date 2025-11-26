@@ -18,3 +18,15 @@ data_source = context.data_sources.add_pandas_gcs(
 asset_name = "goibibo_flights_data"
 gcs_prefix = "data/goibibo_flights_data.csv"
 data_asset = data_source.add_csv_asset(name=asset_name, gcs_prefix=gcs_prefix)
+
+#define a "Batch Definition"- it determines which records in a Data Asset are retrieved for Validation
+batch_definition_name = "goibibo_flights_data_whole"
+batch_definition_path = "data/goibibo_flights_data.csv"
+batch_definition = data_asset.add_batch_definiton(name=batch_definition_name)
+batch = batch_definition.get_batch()
+print(batch.head())
+
+#build expectations and add to expectation suite
+suite = context.suites.add(
+    gx.ExpectationSuite(name="flight_expectation_suite")
+)
