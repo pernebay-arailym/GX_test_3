@@ -1,8 +1,8 @@
 import great_expectations as gx
 import pandas as pd 
+from pathlib import Path
 import os
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/arailym.pernebay/Documents/GX_test_projects/GX_test_3/data/goibibo_flights_data.csv"
-
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/arailym.pernebay/Documents/GX_test_projects/GX_test_3/credentials/gcs_key.json"
 #gx context setup
 context = gx.get_context(mode='file')
 
@@ -71,3 +71,22 @@ action_list =[
         name="update_all_data_docs",
     )
 ]
+
+checkpoint = gx.Checkpoint(
+    name="flight_checkpoint",
+    validation_definitions=validation_definitions,
+    actions=action_list,
+    result_format={"result_format": "COMPLET"},
+)
+
+context.checkpoints.add(checkpoint)
+
+#run checkpoint
+validation_results=checkpoint.run()
+#print(validation_results)
+
+#save results in the folder
+Path("results").mkdir(exist_ok=True)
+
+with open("results/validation_results.txt", "w") as f:
+    f.write(str(validation_results))
