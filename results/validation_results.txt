@@ -1,24 +1,34 @@
-run_id={"run_name": null, "run_time": "2025-11-28T16:38:25.379627+01:00"} run_results={ValidationResultIdentifier::flight_expectation_suite_5/__none__/20251128T153825.379627Z/flights_data_source_10-goibibo_flights_data: {
+run_id={"run_name": null, "run_time": "2025-12-04T16:23:17.164041+01:00"} run_results={ValidationResultIdentifier::flight_expectation_suite_33/__none__/20251204T152317.164041Z/flights_data_source_37-goibibo_flights_data: {
   "success": false,
   "results": [
     {
-      "success": false,
+      "success": true,
       "expectation_config": {
         "type": "expect_column_values_to_not_be_null",
         "kwargs": {
-          "column": "airline",
-          "batch_id": "flights_data_source_10-goibibo_flights_data"
+          "batch_id": "flights_data_source_37-goibibo_flights_data",
+          "column": "airline"
         },
         "meta": {},
-        "id": "a953ba42-a76b-4c46-9799-2a52a63b9e2a",
+        "id": "bf976ce2-b200-4777-96d4-22813a50c28d",
         "severity": "critical"
       },
-      "result": {},
+      "result": {
+        "element_count": 300261,
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0,
+        "partial_unexpected_list": [],
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "unexpected_list": [],
+        "unexpected_index_list": [],
+        "unexpected_index_query": "df.filter(items=[], axis=0)"
+      },
       "meta": {},
       "exception_info": {
-        "exception_traceback": "Traceback (most recent call last):\n  File \"/Users/pernebayarailym/Documents/Portfolio_Projects_AP/Python Projects/GX_test_3/venv/lib/python3.12/site-packages/great_expectations/validator/validator.py\", line 650, in graph_validate\n    result = expectation.metrics_validate(\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/pernebayarailym/Documents/Portfolio_Projects_AP/Python Projects/GX_test_3/venv/lib/python3.12/site-packages/great_expectations/expectations/expectation.py\", line 1308, in metrics_validate\n    expectation_validation_result: Union[ExpectationValidationResult, dict] = self._validate(\n                                                                              ^^^^^^^^^^^^^^^\n  File \"/Users/pernebayarailym/Documents/Portfolio_Projects_AP/Python Projects/GX_test_3/venv/lib/python3.12/site-packages/great_expectations/expectations/core/expect_column_values_to_not_be_null.py\", line 424, in _validate\n    return _format_map_output(\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/Users/pernebayarailym/Documents/Portfolio_Projects_AP/Python Projects/GX_test_3/venv/lib/python3.12/site-packages/great_expectations/expectations/expectation.py\", line 2995, in _format_map_output\n    raise ValueError(f\"Unknown result_format {result_format['result_format']}.\")  # noqa: TRY003 # FIXME CoP\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Unknown result_format COMPLET.\n",
-        "exception_message": "Unknown result_format COMPLET.",
-        "raised_exception": true
+        "raised_exception": false,
+        "exception_traceback": null,
+        "exception_message": null
       }
     },
     {
@@ -26,7 +36,84 @@ run_id={"run_name": null, "run_time": "2025-11-28T16:38:25.379627+01:00"} run_re
       "expectation_config": {
         "type": "expect_column_distinct_values_to_be_in_set",
         "kwargs": {
-          "batch_id": "flights_data_source_10-goibibo_flights_data",
+          "batch_id": "flights_data_source_37-goibibo_flights_data",
+          "column": "airline",
+          "value_set": [
+            "Air India",
+            "Indigo",
+            "SpiceJet",
+            "Vistara",
+            "AirAsia",
+            "GO FIRST",
+            "Trujet",
+            "StarAir"
+          ]
+        },
+        "meta": {},
+        "id": "852e9492-5c3d-4be7-a843-306e8fcfb59e",
+        "severity": "critical"
+      },
+      "result": {
+        "observed_value": [
+          "Air India",
+          "AirAsia",
+          "GO FIRST",
+          "Indigo",
+          "SpiceJet",
+          "StarAir",
+          "Trujet",
+          "Vistara"
+        ],
+        "details": {
+          "value_counts": [
+            {
+              "value": "Air India",
+              "count": 80894
+            },
+            {
+              "value": "AirAsia",
+              "count": 16098
+            },
+            {
+              "value": "GO FIRST",
+              "count": 23177
+            },
+            {
+              "value": "Indigo",
+              "count": 43120
+            },
+            {
+              "value": "SpiceJet",
+              "count": 9011
+            },
+            {
+              "value": "StarAir",
+              "count": 61
+            },
+            {
+              "value": "Trujet",
+              "count": 41
+            },
+            {
+              "value": "Vistara",
+              "count": 127859
+            }
+          ]
+        }
+      },
+      "meta": {},
+      "exception_info": {
+        "raised_exception": false,
+        "exception_traceback": null,
+        "exception_message": null
+      }
+    },
+    {
+      "success": true,
+      "expectation_config": {
+        "type": "expect_column_distinct_values_to_be_in_set",
+        "kwargs": {
+          "batch_id": "flights_data_source_37-goibibo_flights_data",
           "column": "class",
           "value_set": [
             "economy",
@@ -34,7 +121,7 @@ run_id={"run_name": null, "run_time": "2025-11-28T16:38:25.379627+01:00"} run_re
           ]
         },
         "meta": {},
-        "id": "d15d3147-5daf-4b3f-85a5-dd35fdb22518",
+        "id": "1d3d76a4-ad8b-47db-b39d-ed9068514ec4",
         "severity": "critical"
       },
       "result": {
@@ -61,15 +148,313 @@ run_id={"run_name": null, "run_time": "2025-11-28T16:38:25.379627+01:00"} run_re
         "exception_traceback": null,
         "exception_message": null
       }
+    },
+    {
+      "success": false,
+      "expectation_config": {
+        "type": "expect_column_distinct_values_to_be_in_set",
+        "kwargs": {
+          "batch_id": "flights_data_source_37-goibibo_flights_data",
+          "column": "stops",
+          "value_set": [
+            "non-stop",
+            "1-stop",
+            "1-stop Via Raipur",
+            "2+-stops"
+          ]
+        },
+        "meta": {},
+        "id": "5479ce63-996f-4fc2-b5d6-0162e119ab52",
+        "severity": "critical"
+      },
+      "result": {
+        "observed_value": [
+          "1-stop",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia BBI\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Bhubaneswar\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Chennai\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Delhi\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia GAU\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia GAY\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia GOP\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Guwahati\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia HYD\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Hyderabad\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia IDR\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia IXE\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia IXR\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia IXU\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Indore\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia JGB\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia JRG\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia KLH\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Kolhapur\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Kolkata\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Lucknow\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia MYQ\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Mangalore\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Mumbai\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Mysore\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia NAG\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia NDC\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Nagpur\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia PAT\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Patna\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia RPR\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Raipur\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Ranchi\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia STV\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Surat\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia VTZ\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Vishakhapatnam\n\t\t\t\t\t\t\t\t\t\t\t\t",
+          "2+-stop",
+          "non-stop"
+        ],
+        "details": {
+          "value_counts": [
+            {
+              "value": "1-stop",
+              "count": 243603
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia BBI\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 158
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Bhubaneswar\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 301
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Chennai\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 77
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Delhi\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 153
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia GAU\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 3
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia GAY\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 3
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia GOP\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 16
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Guwahati\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 55
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia HYD\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 1
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Hyderabad\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 143
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia IDR\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 1398
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia IXE\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 120
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia IXR\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 4
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia IXU\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 1839
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Indore\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 381
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia JGB\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 193
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia JRG\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 175
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia KLH\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 284
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Kolhapur\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 5
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Kolkata\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 28
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Lucknow\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 13
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia MYQ\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 321
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Mangalore\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 39
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Mumbai\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 31
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Mysore\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 45
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia NAG\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 9
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia NDC\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 22
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Nagpur\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 25
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia PAT\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 354
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Patna\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 674
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia RPR\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 22
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Raipur\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 102
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Ranchi\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 114
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia STV\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 169
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Surat\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 14
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia VTZ\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 27
+            },
+            {
+              "value": "1-stop\n\t\t\t\t\t\t\t\t\t\t\t\tVia Vishakhapatnam\n\t\t\t\t\t\t\t\t\t\t\t\t",
+              "count": 8
+            },
+            {
+              "value": "2+-stop",
+              "count": 13288
+            },
+            {
+              "value": "non-stop",
+              "count": 36044
+            }
+          ]
+        }
+      },
+      "meta": {},
+      "exception_info": {
+        "raised_exception": false,
+        "exception_traceback": null,
+        "exception_message": null
+      }
+    },
+    {
+      "success": true,
+      "expectation_config": {
+        "type": "expect_column_distinct_values_to_be_in_set",
+        "kwargs": {
+          "batch_id": "flights_data_source_37-goibibo_flights_data",
+          "column": "from",
+          "value_set": [
+            "Delhi",
+            "Bangalore",
+            "Chennai",
+            "Hyderabad",
+            "Kolkata",
+            "Mumbai"
+          ]
+        },
+        "meta": {},
+        "id": "194c914a-32c1-4eec-8ac1-fb68731efea4",
+        "severity": "critical"
+      },
+      "result": {
+        "observed_value": [
+          "Bangalore",
+          "Chennai",
+          "Delhi",
+          "Hyderabad",
+          "Kolkata",
+          "Mumbai"
+        ],
+        "details": {
+          "value_counts": [
+            {
+              "value": "Bangalore",
+              "count": 52106
+            },
+            {
+              "value": "Chennai",
+              "count": 38700
+            },
+            {
+              "value": "Delhi",
+              "count": 61345
+            },
+            {
+              "value": "Hyderabad",
+              "count": 40860
+            },
+            {
+              "value": "Kolkata",
+              "count": 46347
+            },
+            {
+              "value": "Mumbai",
+              "count": 60903
+            }
+          ]
+        }
+      },
+      "meta": {},
+      "exception_info": {
+        "raised_exception": false,
+        "exception_traceback": null,
+        "exception_message": null
+      }
     }
   ],
-  "suite_name": "flight_expectation_suite_5",
+  "suite_name": "flight_expectation_suite_33",
   "suite_parameters": {},
   "statistics": {
-    "evaluated_expectations": 2,
-    "successful_expectations": 1,
+    "evaluated_expectations": 5,
+    "successful_expectations": 4,
     "unsuccessful_expectations": 1,
-    "success_percent": 50.0
+    "success_percent": 80.0
   },
   "meta": {
     "great_expectations_version": "1.9.1",
@@ -79,11 +464,11 @@ run_id={"run_name": null, "run_time": "2025-11-28T16:38:25.379627+01:00"} run_re
       "reader_options": {}
     },
     "batch_markers": {
-      "ge_load_time": "20251128T153825.385218Z",
+      "ge_load_time": "20251204T152317.167460Z",
       "pandas_data_fingerprint": "a5cce54c11854323484a6f6e3cb8f909"
     },
     "active_batch_definition": {
-      "datasource_name": "flights_data_source_10",
+      "datasource_name": "flights_data_source_37",
       "data_connector_name": "fluent",
       "data_asset_name": "goibibo_flights_data",
       "batch_identifiers": {
@@ -91,19 +476,19 @@ run_id={"run_name": null, "run_time": "2025-11-28T16:38:25.379627+01:00"} run_re
       },
       "batching_regex": "(?P<path>data/.*)"
     },
-    "validation_id": "92a45a27-b0b3-4230-a2b2-5f2cfebb6384",
-    "checkpoint_id": "01e8c195-41d8-4a37-8cd7-a5a0b00e6970",
+    "validation_id": "b644e15e-ac45-4ba4-8eb8-ba3e0e33e25b",
+    "checkpoint_id": "56e9ea32-43a4-4d77-a833-c9ccd3392ce2",
     "run_id": {
       "run_name": null,
-      "run_time": "2025-11-28T16:38:25.379627+01:00"
+      "run_time": "2025-12-04T16:23:17.164041+01:00"
     },
-    "validation_time": "2025-11-28T15:38:25.379627+00:00",
+    "validation_time": "2025-12-04T15:23:17.164041+00:00",
     "batch_parameters": null
   },
   "id": null
-}} checkpoint_config=Checkpoint(name='flight_checkpoint_2', validation_definitions=[ValidationDefinition(name='flight_batch_definition_3', data=BatchDefinition(id=UUID('0347f8f3-3a3b-471e-96d8-0a8324871fb9'), name='goibibo_flights_data_whole', partitioner=None), suite={
-  "name": "flight_expectation_suite_5",
-  "id": "e2267baf-e39f-480e-9d05-d0b74afdf58c",
+}} checkpoint_config=Checkpoint(name='flight_checkpoint_28', validation_definitions=[ValidationDefinition(name='flight_batch_definition_31', data=BatchDefinition(id=UUID('ceadcfff-d23a-4aa5-87e6-2ccc9c888a7f'), name='goibibo_flights_data_whole', partitioner=None), suite={
+  "name": "flight_expectation_suite_33",
+  "id": "f7c4e358-f74a-4680-a6da-4eb2cd5c9e15",
   "expectations": [
     {
       "type": "expect_column_values_to_not_be_null",
@@ -111,7 +496,7 @@ run_id={"run_name": null, "run_time": "2025-11-28T16:38:25.379627+01:00"} run_re
         "column": "airline"
       },
       "meta": {},
-      "id": "a953ba42-a76b-4c46-9799-2a52a63b9e2a",
+      "id": "bf976ce2-b200-4777-96d4-22813a50c28d",
       "severity": "critical"
     },
     {
@@ -124,7 +509,58 @@ run_id={"run_name": null, "run_time": "2025-11-28T16:38:25.379627+01:00"} run_re
         ]
       },
       "meta": {},
-      "id": "d15d3147-5daf-4b3f-85a5-dd35fdb22518",
+      "id": "1d3d76a4-ad8b-47db-b39d-ed9068514ec4",
+      "severity": "critical"
+    },
+    {
+      "type": "expect_column_distinct_values_to_be_in_set",
+      "kwargs": {
+        "column": "stops",
+        "value_set": [
+          "non-stop",
+          "1-stop",
+          "1-stop Via Raipur",
+          "2+-stops"
+        ]
+      },
+      "meta": {},
+      "id": "5479ce63-996f-4fc2-b5d6-0162e119ab52",
+      "severity": "critical"
+    },
+    {
+      "type": "expect_column_distinct_values_to_be_in_set",
+      "kwargs": {
+        "column": "from",
+        "value_set": [
+          "Delhi",
+          "Bangalore",
+          "Chennai",
+          "Hyderabad",
+          "Kolkata",
+          "Mumbai"
+        ]
+      },
+      "meta": {},
+      "id": "194c914a-32c1-4eec-8ac1-fb68731efea4",
+      "severity": "critical"
+    },
+    {
+      "type": "expect_column_distinct_values_to_be_in_set",
+      "kwargs": {
+        "column": "airline",
+        "value_set": [
+          "Air India",
+          "Indigo",
+          "SpiceJet",
+          "Vistara",
+          "AirAsia",
+          "GO FIRST",
+          "Trujet",
+          "StarAir"
+        ]
+      },
+      "meta": {},
+      "id": "852e9492-5c3d-4be7-a843-306e8fcfb59e",
       "severity": "critical"
     }
   ],
@@ -132,4 +568,4 @@ run_id={"run_name": null, "run_time": "2025-11-28T16:38:25.379627+01:00"} run_re
     "great_expectations_version": "1.9.1"
   },
   "notes": null
-}, id='92a45a27-b0b3-4230-a2b2-5f2cfebb6384')], actions=[UpdateDataDocsAction(type='update_data_docs', name='update_all_data_docs', site_names=[])], result_format={'result_format': 'COMPLET'}, id='01e8c195-41d8-4a37-8cd7-a5a0b00e6970') success=False
+}, id='b644e15e-ac45-4ba4-8eb8-ba3e0e33e25b')], actions=[UpdateDataDocsAction(type='update_data_docs', name='update_all_data_docs', site_names=[])], result_format={'result_format': 'COMPLETE'}, id='56e9ea32-43a4-4d77-a833-c9ccd3392ce2') success=False

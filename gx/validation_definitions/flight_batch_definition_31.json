@@ -1,0 +1,22 @@
+{
+  "data": {
+    "asset": {
+      "id": "2aab2555-004c-4434-b1e2-2c68737f9b2d",
+      "name": "goibibo_flights_data"
+    },
+    "batch_definition": {
+      "id": "ceadcfff-d23a-4aa5-87e6-2ccc9c888a7f",
+      "name": "goibibo_flights_data_whole"
+    },
+    "datasource": {
+      "id": "ec53b1a1-45a5-45d8-a112-b6438f89d589",
+      "name": "flights_data_source_37"
+    }
+  },
+  "id": "b644e15e-ac45-4ba4-8eb8-ba3e0e33e25b",
+  "name": "flight_batch_definition_31",
+  "suite": {
+    "id": "f7c4e358-f74a-4680-a6da-4eb2cd5c9e15",
+    "name": "flight_expectation_suite_33"
+  }
+}
