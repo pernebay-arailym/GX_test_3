@@ -10,6 +10,13 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = (
     "/Users/pernebayarailym/Documents/Portfolio_Projects_AP/Python Projects/GX_test_3/credentials/gcs_key.json"
 )
 
+df = pd.read_csv(
+    "/Users/pernebayarailym/Documents/Portfolio_Projects_AP/Python Projects/GX_test_3/data/goibibo_flights_data.csv"
+)
+df["price"] = df["price"].str.replace(",", "").astype(int)
+
+# optional: re-save cleaned file for GE to read
+df.to_csv("data/goibibo_flights_data_clean.csv", index=False)
 # gx context setup
 context = gx.get_context(mode="file")
 
@@ -21,7 +28,7 @@ context = gx.get_context(mode="file")
 #    name="flights_data_source", bucket_or_name="flights-dataset-yt-tutorial", gcs_options = gcs_options
 #    )
 
-data_source_name = "flights_data_source_10"
+data_source_name = "flights_data_source_23"
 bucket_or_name = "flights-dataset-tutorial"
 gcs_options = {}
 data_source = context.data_sources.add_pandas_gcs(
@@ -43,24 +50,52 @@ batch = batch_definition.get_batch()
 print(batch.head())
 
 # build expectations and add to expectation suite
-suite = context.suites.add(gx.ExpectationSuite(name="flight_expectation_suite_5"))
+suite_name = "flight_expectation_suite_18"
+
+try:
+    suite = context.suites.get(suite_name)
+except gx.exceptions.DataContextError:
+    suite = gx.ExpectationSuite(name=suite_name)
+    context.suites.add_or_update(suite)
+
 
 expectation1 = gx.expectations.ExpectColumnValuesToNotBeNull(column="airline")
 expectation2 = gx.expectations.ExpectColumnDistinctValuesToBeInSet(
     column="class", value_set=["economy", "business"]
 )
+# 3. "stops" column must contain only defined stop categories
+expectation3 = gx.expectations.ExpectColumnDistinctValuesToBeInSet(
+    column="stops", value_set=["non-stop", "1-stop"]
+)
+
+# 4. "price" should fall within expected range (string comparison but still meaningful)
+expectation4 = gx.expectations.ExpectColumnValuesToBeBetween(
+    column="price", min_value=5000, max_value=7000
+)
+
+# 5. "duration" must follow pattern like '02h 10m'
+expectation5 = gx.expectations.ExpectColumnValuesToMatchRegex(
+    column="duration", regex=r"^\d{2}h \d{2}m$"
+)
+
 
 suite.add_expectation(expectation=expectation1)
 suite.add_expectation(expectation=expectation2)
+suite.add_expectation(expectation=expectation3)
+suite.add_expectation(expectation=expectation4)
+suite.add_expectation(expectation=expectation5)
+
+context.suites.add_or_update(suite)
 
 # define 'Validation Definition' : a Validation Definition is a fixed reference that links a Batch of data to an Expectation Suite
-validation_definition = gx.ValidationDefinition(
-    data=batch_definition, suite=suite, name="flight_batch_definition_3"
-)
+vd_name = "flight_batch_definition_17"
+try:
+    validation_definition = context.validation_definitions.get(vd_name)
+except gx.exceptions.DataContextError:
+    validation_definition = context.validation_definitions.add(
+        gx.ValidationDefinition(data=batch_definition, suite=suite, name=vd_name)
+    )
 
-validation_definition = context.validation_definitions.add(validation_definition)
-validation_results = validation_definition.run()
-print(validation_results)
 
 # create a Checkpoint with Actions for multiple validation_definition
 validation_definitions = [validation_definition]  # can be multiple definitions
@@ -87,17 +122,26 @@ action_list = [
         name="update_all_data_docs",
     ),
 ]
-checkpoint = gx.Checkpoint(
-    name="flight_checkpoint_2",
-    validation_definitions=validation_definitions,
-    actions=action_list,
-    result_format={"result_format": "COMPLET"},
-)
+cp_name = "flight_checkpoint_14"
+try:
+    checkpoint = context.checkpoints.get(cp_name)
+except gx.exceptions.DataContextError:
+    checkpoint = context.checkpoints.add(
+        gx.Checkpoint(
+            name=cp_name,
+            validation_definitions=validation_definitions,
+            actions=action_list,
+            result_format={"result_format": "COMPLETE"},
+        )
+    )
 
-context.checkpoints.add(checkpoint)
 
 # run checkpoint
 validation_results = checkpoint.run()
+context.checkpoints.save(checkpoint)
+results = context.run_checkpoint("flight_checkpoint_14")
+results
+
 # print(validation_results)
 
 # save results in the folder
