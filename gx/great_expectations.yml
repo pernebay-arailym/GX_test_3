@@ -236,5 +236,200 @@ fluent_datasources:
           gcs_prefix: data/
     bucket_or_name: flights-dataset-tutorial
     gcs_options: {}
+  flights_data_source_11:
+    type: pandas_gcs
+    id: 2e2d2228-d6d3-4f3c-9353-88c7aab28926
+    assets:
+      goibibo_flights_data:
+        type: csv
+        id: 4e4dfb8b-e548-417a-9106-8c024c85cce2
+        batch_definitions:
+          goibibo_flights_data_whole:
+            id: 699bc8a1-f266-489f-81fb-82c8f128138e
+            partitioner:
+        connect_options:
+          gcs_prefix: data/
+    bucket_or_name: flights-dataset-tutorial
+    gcs_options: {}
+  flights_data_source_12:
+    type: pandas_gcs
+    id: 5233e756-c34a-4364-8e19-6846fe7b5191
+    assets:
+      goibibo_flights_data:
+        type: csv
+        id: 73ac8581-9a39-46f1-bc6e-06b4541d80b2
+        batch_definitions:
+          goibibo_flights_data_whole:
+            id: 732758d7-4691-42b6-8b33-7860e990f2e5
+            partitioner:
+        connect_options:
+          gcs_prefix: data/
+    bucket_or_name: flights-dataset-tutorial
+    gcs_options: {}
+  flights_data_source_13:
+    type: pandas_gcs
+    id: 8827f288-17e8-45f6-bd98-8ffcdb7c6582
+    assets:
+      goibibo_flights_data:
+        type: csv
+        id: 8cb54d57-ef3c-494f-aaec-852ebcde17ca
+        batch_definitions:
+          goibibo_flights_data_whole:
+            id: cd4087f7-e1e9-425a-9d6a-966821cc6ed8
+            partitioner:
+        connect_options:
+          gcs_prefix: data/
+    bucket_or_name: flights-dataset-tutorial
+    gcs_options: {}
+  flights_data_source_14:
+    type: pandas_gcs
+    id: 74a73578-00a3-496c-99b2-41d91fe06e56
+    assets:
+      goibibo_flights_data:
+        type: csv
+        id: 383248cf-e648-4ce7-8c0d-28131ade099d
+        batch_definitions:
+          goibibo_flights_data_whole:
+            id: cab7ba07-bbd1-4720-b52d-008e58929861
+            partitioner:
+        connect_options:
+          gcs_prefix: data/
+    bucket_or_name: flights-dataset-tutorial
+    gcs_options: {}
+  flights_data_source_15:
+    type: pandas_gcs
+    id: 8ef1de0b-67b1-4405-b400-8b1feda1610a
+    assets:
+      goibibo_flights_data:
+        type: csv
+        id: 7f1cab52-13f0-4f02-bcc4-307f59b09a71
+        batch_definitions:
+          goibibo_flights_data_whole:
+            id: e4747fee-5cf6-453b-890c-59f791b20fe7
+            partitioner:
+        connect_options:
+          gcs_prefix: data/
+    bucket_or_name: flights-dataset-tutorial
+    gcs_options: {}
+  flights_data_source_16:
+    type: pandas_gcs
+    id: 66ddce6c-9e11-48c2-a3b0-68723e85e366
+    assets:
+      goibibo_flights_data:
+        type: csv
+        id: b26139c7-7e3e-4978-b9b3-9f073e81e9cb
+        batch_definitions:
+          goibibo_flights_data_whole:
+            id: f422d96f-4895-45ca-8bbd-65b05c83f1ec
+            partitioner:
+        connect_options:
+          gcs_prefix: data/
+    bucket_or_name: flights-dataset-tutorial
+    gcs_options: {}
+  flights_data_source_17:
+    type: pandas_gcs
+    id: 587f0aa8-b5da-48c8-8bda-919077f6a8da
+    assets:
+      goibibo_flights_data:
+        type: csv
+        id: 95d423d8-ebed-4f51-b186-489e098174ea
+        batch_definitions:
+          goibibo_flights_data_whole:
+            id: db60049a-ef17-4e3d-b878-47284f65e536
+            partitioner:
+        connect_options:
+          gcs_prefix: data/
+    bucket_or_name: flights-dataset-tutorial
+    gcs_options: {}
+  flights_data_source_18:
+    type: pandas_gcs
+    id: 1f0e7a55-c70e-4855-b659-4614e86ba3b6
+    assets:
+      goibibo_flights_data:
+        type: csv
+        id: c0113d9c-86f0-4dcf-b68b-0adab2ec720d
+        batch_definitions:
+          goibibo_flights_data_whole:
+            id: 0d03b331-2b05-41e1-9af4-afb167e7021c
+            partitioner:
+        connect_options:
+          gcs_prefix: data/
+    bucket_or_name: flights-dataset-tutorial
+    gcs_options: {}
+  flights_data_source_19:
+    type: pandas_gcs
+    id: 1802a2bb-06d6-492a-99e8-aa4d8b1a01ee
+    assets:
+      goibibo_flights_data:
+        type: csv
+        id: bb3d7cb5-ec99-4518-81ee-43bc6f24669b
+        batch_definitions:
+          goibibo_flights_data_whole:
+            id: 3b6a1093-a7fe-43f7-bf6e-e07a41ae04ea
+            partitioner:
+        connect_options:
+          gcs_prefix: data/
+    bucket_or_name: flights-dataset-tutorial
+    gcs_options: {}
+  flights_data_source_20:
+    type: pandas_gcs
+    id: 5c547eb7-9a30-4f13-a602-0ee9e31c987d
+    assets:
+      goibibo_flights_data:
+        type: csv
+        id: b53c966e-099e-4aba-a548-16cb613c4f1e
+        batch_definitions:
+          goibibo_flights_data_whole:
+            id: b0306902-9504-4a3d-b614-9183d1a0bb57
+            partitioner:
+        connect_options:
+          gcs_prefix: data/
+    bucket_or_name: flights-dataset-tutorial
+    gcs_options: {}
+  flights_data_source_21:
+    type: pandas_gcs
+    id: cd7b02d6-b8ad-40f8-9854-d16c3cf3dc2c
+    assets:
+      goibibo_flights_data:
+        type: csv
+        id: 227c9a9a-8190-4d0f-a739-8f1b206f4a72
+        batch_definitions:
+          goibibo_flights_data_whole:
+            id: 42703c57-1c29-4227-a697-3a7b211a8b05
+            partitioner:
+        connect_options:
+          gcs_prefix: data/
+    bucket_or_name: flights-dataset-tutorial
+    gcs_options: {}
+  flights_data_source_22:
+    type: pandas_gcs
+    id: 5cd9d79c-0bf5-4a98-81c0-1259eac3ab22
+    assets:
+      goibibo_flights_data:
+        type: csv
+        id: bf049033-1fb9-4e9e-96f7-505f66df499f
+        batch_definitions:
+          goibibo_flights_data_whole:
+            id: 6f038464-a9dd-42ab-b8bc-b7ae5ce850d9
+            partitioner:
+        connect_options:
+          gcs_prefix: data/
+    bucket_or_name: flights-dataset-tutorial
+    gcs_options: {}
+  flights_data_source_23:
+    type: pandas_gcs
+    id: 3cd31a46-1097-4804-a258-eda3adb78df0
+    assets:
+      goibibo_flights_data:
+        type: csv
+        id: 1a8f531b-f91c-4d3c-be71-80516c3d6dea
+        batch_definitions:
+          goibibo_flights_data_whole:
+            id: 60054dc8-db5f-4d31-ab63-50aa35593285
+            partitioner:
+        connect_options:
+          gcs_prefix: data/
+    bucket_or_name: flights-dataset-tutorial
+    gcs_options: {}
 analytics_enabled:
 data_context_id: edb5f213-8719-4090-ba04-09110808d2e8

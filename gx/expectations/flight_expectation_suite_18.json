@@ -1,0 +1,66 @@
+{
+  "expectations": [
+    {
+      "id": "e683c307-df5d-4593-a233-13eee893ef5d",
+      "kwargs": {
+        "column": "airline"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "1f4e14fc-c5df-431a-836e-735ca287b1b9",
+      "kwargs": {
+        "column": "class",
+        "value_set": [
+          "economy",
+          "business"
+        ]
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_distinct_values_to_be_in_set"
+    },
+    {
+      "id": "985eea15-88c8-4ebc-a1c0-82dfdc151745",
+      "kwargs": {
+        "column": "stops",
+        "value_set": [
+          "non-stop",
+          "1-stop"
+        ]
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_distinct_values_to_be_in_set"
+    },
+    {
+      "id": "0c45d3bd-90a0-4f67-87ff-7128b1d2032a",
+      "kwargs": {
+        "column": "price",
+        "max_value": 7000.0,
+        "min_value": 5000.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "8fd774de-547c-4981-9e95-dd2df82fcc45",
+      "kwargs": {
+        "column": "duration",
+        "regex": "^\\d{2}h \\d{2}m$"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_match_regex"
+    }
+  ],
+  "id": "a3670298-be39-472e-850c-1a250279eae4",
+  "meta": {
+    "great_expectations_version": "1.9.1"
+  },
+  "name": "flight_expectation_suite_18",
+  "notes": null
+}
