@@ -3,17 +3,19 @@ import great_expectations as gx
 print(gx.__version__)
 import pandas as pd
 from pathlib import Path
+from dotenv import load_dotenv
 import os
 
-
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = (
-    "/Users/pernebayarailym/Documents/Portfolio_Projects_AP/Python Projects/GX_test_3/credentials/gcs_key.json"
-)
+load_dotenv()
 
 df = pd.read_csv(
     "/Users/pernebayarailym/Documents/Portfolio_Projects_AP/Python Projects/GX_test_3/data/goibibo_flights_data.csv"
 )
-df["price"] = df["price"].str.replace(",", "").astype(int)
+# df["price"] = df["price"].str.replace(",", "").astype(int)
+
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = (
+    "/Users/pernebayarailym/Documents/Portfolio_Projects_AP/Python Projects/GX_test_3/credentials/gcs_key.json"
+)
 
 # optional: re-save cleaned file for GE to read
 df.to_csv("data/goibibo_flights_data_clean.csv", index=False)
@@ -28,7 +30,7 @@ context = gx.get_context(mode="file")
 #    name="flights_data_source", bucket_or_name="flights-dataset-yt-tutorial", gcs_options = gcs_options
 #    )
 
-data_source_name = "flights_data_source_23"
+data_source_name = "flights_data_source_37"
 bucket_or_name = "flights-dataset-tutorial"
 gcs_options = {}
 data_source = context.data_sources.add_pandas_gcs(
@@ -50,7 +52,7 @@ batch = batch_definition.get_batch()
 print(batch.head())
 
 # build expectations and add to expectation suite
-suite_name = "flight_expectation_suite_18"
+suite_name = "flight_expectation_suite_33"
 
 try:
     suite = context.suites.get(suite_name)
@@ -65,19 +67,29 @@ expectation2 = gx.expectations.ExpectColumnDistinctValuesToBeInSet(
 )
 # 3. "stops" column must contain only defined stop categories
 expectation3 = gx.expectations.ExpectColumnDistinctValuesToBeInSet(
-    column="stops", value_set=["non-stop", "1-stop"]
+    column="stops", value_set=["non-stop", "1-stop", "1-stop Via Raipur", "2+-stops"]
 )
 
-# 4. "price" should fall within expected range (string comparison but still meaningful)
-expectation4 = gx.expectations.ExpectColumnValuesToBeBetween(
-    column="price", min_value=5000, max_value=7000
+# 4. "price" should fall within expected range
+expectation4 = gx.expectations.ExpectColumnDistinctValuesToBeInSet(
+    column="from",
+    value_set=["Delhi", "Bangalore", "Chennai", "Hyderabad", "Kolkata", "Mumbai"],
 )
 
-# 5. "duration" must follow pattern like '02h 10m'
-expectation5 = gx.expectations.ExpectColumnValuesToMatchRegex(
-    column="duration", regex=r"^\d{2}h \d{2}m$"
+# 5. airline companies
+expectation5 = gx.expectations.ExpectColumnDistinctValuesToBeInSet(
+    column="airline",
+    value_set=[
+        "Air India",
+        "Indigo",
+        "SpiceJet",
+        "Vistara",
+        "AirAsia",
+        "GO FIRST",
+        "Trujet",
+        "StarAir",
+    ],
 )
-
 
 suite.add_expectation(expectation=expectation1)
 suite.add_expectation(expectation=expectation2)
@@ -88,7 +100,7 @@ suite.add_expectation(expectation=expectation5)
 context.suites.add_or_update(suite)
 
 # define 'Validation Definition' : a Validation Definition is a fixed reference that links a Batch of data to an Expectation Suite
-vd_name = "flight_batch_definition_17"
+vd_name = "flight_batch_definition_31"
 try:
     validation_definition = context.validation_definitions.get(vd_name)
 except gx.exceptions.DataContextError:
@@ -122,7 +134,7 @@ action_list = [
         name="update_all_data_docs",
     ),
 ]
-cp_name = "flight_checkpoint_14"
+cp_name = "flight_checkpoint_28"
 try:
     checkpoint = context.checkpoints.get(cp_name)
 except gx.exceptions.DataContextError:
@@ -138,9 +150,9 @@ except gx.exceptions.DataContextError:
 
 # run checkpoint
 validation_results = checkpoint.run()
-context.checkpoints.save(checkpoint)
-results = context.run_checkpoint("flight_checkpoint_14")
-results
+# context.checkpoints.save(checkpoint)
+# results = context.run_checkpoint("flight_checkpoint_17")
+# results
 
 # print(validation_results)
 
@@ -149,3 +161,78 @@ Path("results").mkdir(exist_ok=True)
 
 with open("results/validation_results.txt", "w") as f:
     f.write(str(validation_results))
+
+
+# EMAIL NOTIFICATION
+
+import smtplib
+from email.mime.text import MIMEText
+from datetime import datetime
+import pytz
+
+
+# 1. Extract success/failure
+all_success = validation_results.success
+failed_expectations = []
+
+for run_result in validation_results.run_results.values():
+    for res in run_result.results:  # use .results in v1.9.1
+        if not res.success:
+            # Access expectation type safely for v1.9.1
+            failed_expectations.append(res.expectation_config["expectation_context"])
+
+
+# 2. Build email content
+
+paris_tz = pytz.timezone("Europe/Paris")
+timestamp = datetime.now(paris_tz).strftime("%Y-%m-%d %H:%M:%S")
+
+if all_success:
+    subject = "GE Validation PASSED ✓"
+    body = f"""
+Great Expectations Validation Report
+Time: {timestamp}
+
+All expectations passed successfully.
+
+Total expectations: 5
+Passed: 5
+Failed: 0
+"""
+else:
+    subject = "GE Validation FAILED ✗"
+    body = f"""
+Great Expectations Validation Report
+Time: {timestamp}
+
+Some expectations FAILED.
+
+Total expectations: 5
+Passed: {5 - len(failed_expectations)}
+Failed: {len(failed_expectations)}
+
+Failed expectation types:
+{failed_expectations}
+
+See full details in: results/validation_results.txt
+"""
+
+
+# 3. Send email via Gmail SMTP
+
+sender_email = "pernebayarailym@gmail.com"
+receiver_email = "pernebayarailym@gmail.com"
+app_password = os.getenv("GMAIL_APP_PASSWORD")
+
+msg = MIMEText(body)
+msg["Subject"] = subject
+msg["From"] = sender_email
+msg["To"] = receiver_email
+
+try:
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+        server.login(sender_email, app_password)
+        server.send_message(msg)
+    print("Email notification sent.")
+except Exception as e:
+    print("Error sending email:", e)

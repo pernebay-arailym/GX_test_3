@@ -3,3 +3,5 @@ credentials
 .DS_Store
 venv
 .vscode
+
+.env
